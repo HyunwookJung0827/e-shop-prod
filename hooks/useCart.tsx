@@ -1,6 +1,5 @@
 import { CartProductType } from "@/app/product/[productId]/ProductDetails";
-import Error, { ErrorProps } from "next/error";
-import { NextResponse } from "next/server";
+import Error from "next/error";
 import {
   createContext,
   useCallback,
@@ -197,8 +196,8 @@ export const useCart = () => {
   const context = useContext(CartContext);
 
   if (context === null) {
-    return NextResponse.error();
-    //throw new Error("useCart must be used within a CartContextProvider" as ErrorProps);
+    const error: Error = new Error("useCart must be used within a CartContextProvider");
+    throw error;
   }
   return context;
 };
